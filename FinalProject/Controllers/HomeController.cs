@@ -6,21 +6,25 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using FinalProject.Models;
+using Microsoft.EntityFrameworkCore;
+using FinalProject.Data;
+using FinalProject.ViewModels;
 
 namespace FinalProject.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        DataDbContext context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(DataDbContext dbContext)
         {
-            _logger = logger;
+            context = dbContext;
         }
 
         public IActionResult Index()
         {
-            return View();
+            List<Product> products = context.Products.ToList();
+            return View(products);
         }
 
         public IActionResult Privacy()
@@ -32,6 +36,30 @@ namespace FinalProject.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        [HttpGet("/Add")]
+        public IActionResult AddProduct()
+        {
+            AddProductViewModel addProductViewModel = new AddProductViewModel();
+            return View(addProductViewModel);
+        }
+
+        [HttpPost]
+        public IActionResult ProcessProductForm(AddProductViewModel addProductViewModel)
+        {
+            
+            
+                Product newProduct = new Product
+                {
+                    productName = addProductViewModel.productName,
+                    productType = addProductViewModel.productType,
+                    productPrice = addProductViewModel.productPrice,
+                    productUnitAmount = addProductViewModel.productUnitAmount,
+                };
+                context.Products.Add(newProduct);
+                context.SaveChanges();
+                return Redirect("/");
         }
     }
 }

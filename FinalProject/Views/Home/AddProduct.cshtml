@@ -1,0 +1,16 @@
+﻿@model FinalProject.ViewModels.AddProductViewModel
+
+
+<form asp-controller="HomeController" asp-action="ProcessProductForm" method="post">
+
+    <label>Name:</label>
+    <input asp-for="productName" />
+    <label>Type:</label>
+    <input asp-for="productType" />
+    <label>Price:</label>
+    <input asp-for="productPrice" />
+    <label>Amount:</label>
+    <input asp-for="productUnitAmount" />
+    <input type="submit" value="Add Product" />
+
+</form>

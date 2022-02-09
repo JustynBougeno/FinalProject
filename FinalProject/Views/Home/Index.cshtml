@@ -1,8 +1,191 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿
+@{
+    ViewData["Title"] = "Justyn's Kung Fu Shop";
 }
 
+<style>
+    table, td {
+        border: 1px solid black;
+    }
+</style>
+
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Welcome Kung Fu Family!</h1>
+    <p>Purchase what you need to start your Wing Chun jouney. <a href="https://www.youtube.com/watch?v=Jt0E7gzusao">Click here to learn about Wing Chun</a>.</p>
+    <p><a asp-controller="Home" asp-action="AddProduct">Add Product</a></p>
 </div>
+
+<form>
+    <label>Search:</label>
+    @*<button for="search">Search:</button><br>*@
+    <input type="text" id="search" name="search">
+    <input type="submit" value="Search" />
+
+</form>
+
+<!--<form asp-controller="HomeController">-->
+
+    @*<label for="add products"> Add Products:</label><br>*@
+    <!--<label>Name:</label>
+    <input asp-for="productName" />
+    <label>Type:</label>
+    <input asp-for="productType" />
+    <label>Price:</label>
+    <input asp-for="productPrice" />
+    <label>Amount:</label>
+    <input asp-for="productUnitAmount" />
+    <input type="submit" value="Add Product" />
+
+</form>-->
+
+<table style="width:100%">
+    <colgroup>
+        <col span="5" style="background-color: #D6EEEE">
+    </colgroup>
+    <tr>
+        <th>Id</th>
+        &nbsp;
+        <th>Name</th>
+        &nbsp;
+        <th>Type</th>
+        &nbsp;
+        <th>Price</th>
+        &nbsp;
+        <th>Units</th>
+        &nbsp;
+    </tr>
+
+
+    @foreach (Product product in Model)
+    {
+        <tr>
+            <td>@product.Id</td>
+            <td>@product.productName</td>
+            <td>@product.productType</td>
+            <td>@product.productPrice</td>
+            <td>@product.productUnitAmount</td>
+        </tr>
+    }
+
+
+    </table style="width:100%">
+
+
+    @*
+
+            * Inline CSS <h1 style="color:blue;">A Blue Heading</h1> <p style="color:red;">A red paragraph.</p> Internal CSS <!DOCTYPE html> <html> <head> <style> body {
+            background-color: powderblue;
+        }
+
+        h1 {
+            color: blue;
+        }
+
+        p {
+            color: red;
+        }
+
+        </style >
+        </head >
+        <body >
+
+        <h1 > This is a heading</h1 >
+        <p > This is a paragraph.</p >
+
+        </body >
+        </html >
+
+        External CSS
+        <!DOCTYPE html >
+        <html >
+        <head >
+        <link rel="stylesheet" href="styles.css" >
+        </head >
+        <body >
+
+                    public string productName { get; set; }
+                    public string productType { get; set; }
+                    public string productPrice { get; set; }
+                    public string productUnitAmount { get; set; }
+                    public int Id { get; set; }
+                <table>
+              <tr>
+                <th>Company</th>
+                <th>Contact</th>
+                <th>Country</th>
+              </tr>
+              <tr>
+                <td>Alfreds Futterkiste</td>
+                <td>Maria Anders</td>
+                <td>Germany</td>
+              </tr>
+              <tr>
+                <td>Centro comercial Moctezuma</td>
+                <td>Francisco Chang</td>
+                <td>Mexico</td>
+              </tr>
+            </table>
+
+
+                      CREATE TABLE products (
+                         id INT,
+                         product_name VARCHAR(255),
+                         product_Type VARCHAR(255),
+                         product_Price VARCHAR(255),
+                         product_Unit_Amount VARCHAR(255)
+                      );
+
+
+                    @{ ViewData["Title"] = "Home Page"; }
+
+                @model List<TechJobsPersistent.Models.Job>
+
+                <div class="text-center">
+                    <h1 class="display-4">Welcome to TechJobs!</h1>
+                    <p><a asp-controller="Home" asp-action="AddJob">Add Jobs</a></p>
+                    <p><a asp-controller="List" asp-action="Index">List Jobs</a></p>
+                    <p><a asp-controller="Search" asp-action="Index">Search Jobs</a></p>
+                </div>
+
+                @if (Model.Count == 0)
+                {
+                <p>No jobs yet!</p> }
+                            else
+                            {
+                <table class="table">
+                    <tr>
+                        <th>Position Name</th>
+                        <th>Employer</th>
+                    </tr>
+                    @foreach (Job job in Model)
+                    {
+                <tr>
+                    <td><a asp-controller="Home" asp-action="Detail" asp-route-id="@job.Id">@job.Name</a></td>
+                    <td>@job.Employer.Name</td>
+                </tr>}
+                </table>}
+
+                @model List<TechJobsPersistent.Models.Employer>
+
+                <h1>Employers Currently Hiring</h1>
+
+                @if (Model.Count == 0)
+                {
+                <p>No employers are currently hiring!</p> }
+                            else
+                            {
+                <div>
+                    <ul>
+                        @foreach (Employer employer in Model)
+                        {
+                <li>
+                    <a asp-controller="Employer" asp-action="About" asp-route-id="@employer.Id">@employer.Name</a>
+                </li>}
+                    </ul>
+                </div>}
+
+
+
+    *@
+
+

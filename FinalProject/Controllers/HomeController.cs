@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using FinalProject.Models;
 using Microsoft.EntityFrameworkCore;
 using FinalProject.Data;
 using FinalProject.ViewModels;
+using System.Collections.Generic;
+using System;
 
 namespace FinalProject.Controllers
 {
@@ -21,12 +20,18 @@ namespace FinalProject.Controllers
             context = dbContext;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index(string searchString)
         {
-            List<Product> products = context.Products.ToList();
-            return View(products);
+            var products = from p in context.Products
+                           select p;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                Console.WriteLine(searchString);
+                products = products.Where(s => s.productName!.Contains(searchString));
+            }
+            
+            return View(await products.ToListAsync());
         }
-
         public IActionResult Privacy()
         {
             return View();

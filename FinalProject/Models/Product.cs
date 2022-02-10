@@ -1,5 +1,4 @@
-﻿using System;
-namespace FinalProject.Models
+﻿namespace FinalProject.Models
 {
     public class Product
     {

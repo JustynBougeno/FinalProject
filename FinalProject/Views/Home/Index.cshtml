@@ -15,28 +15,15 @@
     <p><a asp-controller="Home" asp-action="AddProduct">Add Product</a></p>
 </div>
 
-<form>
+<form asp-controller="Home" asp-action="Index">
     <label>Search:</label>
     @*<button for="search">Search:</button><br>*@
-    <input type="text" id="search" name="search">
+    <input type="text" name="searchString">
     <input type="submit" value="Search" />
 
 </form>
 
-<!--<form asp-controller="HomeController">-->
 
-    @*<label for="add products"> Add Products:</label><br>*@
-    <!--<label>Name:</label>
-    <input asp-for="productName" />
-    <label>Type:</label>
-    <input asp-for="productType" />
-    <label>Price:</label>
-    <input asp-for="productPrice" />
-    <label>Amount:</label>
-    <input asp-for="productUnitAmount" />
-    <input type="submit" value="Add Product" />
-
-</form>-->
 
 <table style="width:100%">
     <colgroup>
